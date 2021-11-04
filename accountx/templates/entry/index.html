@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content p-4">
+  <div class="d-flex flex-row justify-content-between p-3">
+    <h4 class="mb-4">Ledger</h4>
+    <a href="{{url_for('entry.create')}}">Create Entry</a>
+  </div>
+  <div class="widget card flex-row">
+    <section class="card-body">
+      <table id="data" class="table">
+        <thead>
+          <tr>
+            <th> Created at</th>
+            <th> From </th>
+            <th> To </th>
+            <th> Type </th>
+            <th> Amount </th>
+            <th> Action </th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  $(document).ready(function () {
+    $('#data').DataTable({
+      serverTable: true,
+      ajax: '/entries/entries-json' + window.location.search,
+      serverSide: true,
+      columns: [
+        {
+          data: function (row, type, val, meta) {
+            return new Date(row.createdDate).toLocaleString()
+          }
+        },
+        { data: 'fromAccount.name', searchable: false },
+        { data: 'toAccount.name' },
+        { data: 'type' },
+        { data: 'amount' },
+        {
+          data: function (row, type, val, meta) {
+            return `<a href='/entries/${row.id}'>show details</a>`;
+          }
+        }
+      ],
+    });
+  });
+</script>
+{% endblock %}

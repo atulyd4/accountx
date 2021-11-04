@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content p-4">
+  <div class="text-align: center">
+    <h5 "> Entry #{{entry.id}} </h5>
+  <div>
+
+
+
+  <div class=" card txn-details">
+      <div class="card-content p-3">
+        <div>
+          <h3 class=" gray-title"> Amount </h3>
+          <span>
+            {{ entry.amount }}
+          </span>
+        </div>
+        <h5>From :</h5> {{ entry.from_account.name }} <br />
+        <h5>TO :</h5> {{entry.to_account.name}}<br />
+        <h5> transfered money - </h5>
+        <p>{{"% .2f"|format(entry.amount) }}</p>
+        <p>
+        <h5>details -</h5>
+        {{ entry.description }}
+        </p>
+      </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content p-4">
+  <div class="d-flex flex-row justify-content-between p-3">
+    <h4 class="mb-4">Parties</h4>
+    <a href="{{url_for('accounts.create')}}">Add account</a>
+  </div>
+  <div class="widget card flex-row">
+    <section class="card-body">
+      <table style="width:100%" , border="1">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for account in accounts %}
+            <tr>
+              <td>{{ account.name }}</td>
+              <td>
+                <a href="{{url_for('entry.index', account_id=[account.id])}}">Recent Transactions</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </table>
+    </section>
+  </div>
+</div>
+{% endblock %}

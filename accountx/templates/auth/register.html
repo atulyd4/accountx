@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5 d-flex flex-row justify-content-center">
+  <div class="login-box w-50 justify-content-center flex-column">
+    <h3 style="text-align:center">Sign Up</h3>
+    {% from "_formhelpers.html" import render_field %}
+    <form action="{{url_for('auth.register')}}" method="POST">
+      <div class="mb-2">
+        {{ render_field(form.name, class_='form-control') }}
+      </div>
+      <div class="mb-2">
+        {{ render_field(form.email, class_='form-control') }}
+      </div>
+      <div class="mb-2">
+        {{ render_field(form.password, class_='form-control') }}
+      </div>
+      <div class="mb-4">
+        {{ render_field(form.confirm, class_='form-control') }}
+      </div>
+      <div class="mb-4">
+        <input type="submit" class="form-control btn btn-primary" value="Signup">
+      </div>
+    </form>
+    <span> Already have an account? <a href="{{url_for('auth.login')}}">Login</a></span>
+  </div>
+</div>
+{% endblock %}

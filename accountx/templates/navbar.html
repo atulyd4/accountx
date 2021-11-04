@@ -1,0 +1,25 @@
+<ul class="nav nav-pills p-4">
+  <li class="nav-item">
+    <a class="nav-link {{ 'active' if request.path == '/' }}" aria-current="page"
+      href="{{url_for('index')}}">Dashboard</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{ 'active' if request.path.startswith('/entries') }}"
+      href="{{url_for('entry.index')}}">Entries</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{ 'active' if request.path.startswith('/accounts') }}"
+      href="{{url_for('accounts.index')}}">Accounts</a>
+  </li>
+
+  <li class="nav-item dropdown" style="margin-left: auto;">
+    <a class="nav-link" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      <span class="btn" style="color: grey;"> {{ current_user.name }} </span><img src="{{gravatar_url}}" width="40"
+        height="40" class="rounded-circle border">
+    </a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="{{url_for('auth.profile')}}">Profile</a></li>
+      <li><a class="dropdown-item" href="{{url_for('auth.logout')}}">Logout</a></li>
+    </ul>
+  </li>
+</ul>

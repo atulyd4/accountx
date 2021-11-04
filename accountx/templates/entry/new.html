@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content p-4">
+  <h4 class="mb-4">New entry</h4>
+  <section class="card-body">
+    {% from "_formhelpers.html" import render_field %}
+    <form method="post" action="{{url_for('entry.create')}}">
+      <fieldset>
+        <div class="mb-2 d-flex">
+          <span style="display: block; margin-right: 10; width: 250px; padding-right: 10px;">
+            {{ render_field(form.amount, class_='form-control') }}
+          </span>
+          <span style="width: 250px;">
+            {{ render_field(form.type, class_='form-select') }}
+          </span>
+        </div>
+        <div class="mb-2 d-flex">
+          <span style="display: block; margin-right: 10; width: 250px; padding-right: 10px;">
+            {{ render_field(form.from_account, class_='form-select account-select') }}
+          </span>
+          <span style="width: 250px;">
+            {{ render_field(form.to_account, class_='form-select account-select') }}
+          </span>
+        </div>
+        <div class="mb-2 d-flex">
+          <span style="width: 500px;">
+            {{ render_field(form.description,class = 'form-control') }}
+          </span>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a class="btn" href="{{url_for('entry.index')}}">Cancel</a>
+      </fieldset>
+    </form>
+  </section>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    $('.account-select').select2({
+      tags: true
+    });
+  })
+</script>
+{% endblock %}

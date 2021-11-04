@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content p-4">
+  {% if not current_user.onboarded %}
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h5 class="gray-title" style="margin-bottom:30px">Welcome, let's start</h5>
+          <form method="post" action="{{url_for('auth.finish')}}">
+            <fieldset>
+              <div class="mb-3">
+                <label for="disabledTextInput" class="form-label">Currency symbol</label>
+                <input type="text" name="currency_symbol" id="disabledTextInput" class="form-control"
+                  value="{{user.currency_symbol}}" />
+              </div>
+              <div class="mb-3">
+                <label for="disabledTextInput" class="form-label">Timezone</label>
+                <select name="timezone" class="form-select" id="timezone-select">
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Finish</button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  <div class="widget card">
+    <section class="card-body">
+      <div class="d-flex justify-content-between">
+        <div>
+          <span class="gray-title">Total Debit</span>
+          <h2 class="text-success">{{ current_user.currency_symbol or '' }} {{"% .2f" % total_debit or 0 }}
+          </h2>
+        </div>
+        <div>
+          <span class="gray-title">Total Credit</span>
+          <h2 class="text-danger">{{ current_user.currency_symbol or '' }} {{"% .2f" % total_credit or 0 }}
+          </h2>
+        </div>
+        <div>
+          <span class="gray-title">Balance</span>
+          <h2 class="text-info">{{ current_user.currency_symbol or '' }} {{"% .2f" % balance or 0 }}
+          </h2>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="widget card mt-3">
+    <span class="gray-title">Recent transcations</span>
+    <section class="card-body">
+      <table style="width:100%" , border="1">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">From</th>
+              <th scope="col">To</th>
+              <th scope="col">Type</th>
+              <th scope="col">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for entry in entries %}
+            <tr>
+              <th scope="row">{{entry.created_date.date() }}</th>
+              <td>{{ entry.from_account.name }}</td>
+              <td>{{ entry.to_account.name }}</td>
+              <td class="text-{{ 'success' if entry.type.name == 'credit' else 'danger' }}">{{ entry.type.name.upper()
+                }}</td>
+              <td>{{ "%.2f"|format(entry.amount) }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </table>
+    </section>
+  </div>
+</div>
+<script src="/static/js/timezones.full.min.js"></script>
+<script>
+  $('#timezone-select').timezones();
+  $(document).ready(function () {
+    $('#exampleModalCenter').modal('show')
+    $('#timezone-select > option').each(function () {
+      if ($(this).val() == "{{ current_user.timezone }}") {
+        $(this).attr('selected', 'selected');
+      }
+    });
+  });
+</script>
+{% endblock %}
