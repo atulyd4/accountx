@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
 
-DATABASE_URL = os.environ["DATABASE_URL"]
+DATABASE_URL = os.environ["DB_URL"] or os.environ["DATABASE_URL"]
 
 if DATABASE_URL is None:
     raise Exception("Database url is required.")
