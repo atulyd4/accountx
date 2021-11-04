@@ -1,3 +1,4 @@
+import os
 from typing import Union
 from distutils.log import debug
 from flask import Flask, g, render_template, session
@@ -11,8 +12,15 @@ from werkzeug.utils import redirect
 from accountx.utils import gravatar_url
 
 app = Flask(__name__)
-app.secret_key = b"_5#y2Lasdasdad123qdasdaeq231adadsa/"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///accounts.db"
+
+app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
+
+DATABASE_URL = os.environ["DATABASE_URL"]
+
+if DATABASE_URL is None:
+    raise Exception("Database url is required.")
+
+app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 
 db = SQLAlchemy(app)

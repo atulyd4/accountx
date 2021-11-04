@@ -62,20 +62,14 @@ def index_json():
 
         query = query.join(a1, Entry.from_account)
         query = query.join(a2, Entry.to_account)
-
-        print(query)
         query = query.filter(
             db.or_(
-                Entry.description.ilike(f"%{search}%"),
-                Entry.amount.ilike(f"%{search}%"),
-                a1.name.ilike(f"%{search}%"),
-                a2.name.ilike(f"%{search}%"),
+                a1.name.like(f"%{str(search)}%"),
+                a2.name.like(f"%{str(search)}%"),
             )
         )
 
-    print(request.args)
     if request.args.get("account_id") is not None:
-        print("inside account id block")
         account_id = request.args.get("account_id")
         query = query.filter(
             or_(Entry.from_account_id == account_id, Entry.to_account_id == account_id)
@@ -86,7 +80,6 @@ def index_json():
     length = request.args.get("length", type=int)
     query = query.offset(start).limit(length)
 
-    print(query)
     entries = query.all()
 
     entry_schema = EntrySchema(many=True)
@@ -157,7 +150,6 @@ def create():
             db.session.rollback()
             flash("Unable to save", "danger")
             error = str(e.__dict__["orig"])
-            print(error)
     return render_template("entry/new.html", form=form)
 
 
