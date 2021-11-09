@@ -1,8 +1,10 @@
+from datetime import datetime
+from pytz import timezone
 import urllib, hashlib
 
 
 # Set your variables here
-def gravatar_url(email) -> str:
+def gravatar_url(email: str) -> str:
     if not email:
         return ""
     size = 50
@@ -16,6 +18,6 @@ def gravatar_url(email) -> str:
     return gravatar_url
 
 
-def camelcase(s):
+def camelcase(s: str) -> str:
     parts = iter(s.split("_"))
     return next(parts) + "".join(i.title() for i in parts)

@@ -1,17 +1,17 @@
 {% extends "base.html" %} {% block content %}
 <div class="content p-4">
-    <h4 class="mb-4">New Account</h4>
+    <h4 class="mb-4">Edit Account</h4>
     <section class="card-body">
-        <form method="post" action="{{url_for('accounts.create')}}">
+        <form method="post" action="{{url_for('accounts.edit', account_id=account.id)}}">
             <fieldset>
                 <div class="mb-3">
                     <label for="disabledTextInput" class="form-label">Name</label>
-                    <input type="text" name="name" required id="disabledTextInput" class="form-control" />
+                    <input type="text" name="name" required id="disabledTextInput" class="form-control" value="{{account.name}}" />
                     <label for="phone" class="form-label">phone number</label><br>
-                    <input type="tel" name="phone" class="form-control" />
+                    <input type="tel" name="phone" class="form-control" value="{{account.phone}} " />
 
                 </div>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Update</button>
                 <a class="btn" href="{{url_for('accounts.index')}}">Cancel</a>
             </fieldset>
         </form>

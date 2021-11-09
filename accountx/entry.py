@@ -8,7 +8,6 @@ from flask import Blueprint, flash, redirect, render_template, request, url_for,
 from accountx import current_user, db
 from accountx.models import Account, Entry, EntrySchema
 from sqlalchemy.exc import SQLAlchemyError
-from IPython import embed
 
 
 bp = Blueprint(
@@ -50,6 +49,7 @@ def index():
 
 @bp.get("/entries-json")
 def index_json():
+
     user_id = current_user().id
     query = Entry.query
     query = query.filter(Entry.user_id == user_id)
@@ -64,8 +64,8 @@ def index_json():
         query = query.join(a2, Entry.to_account)
         query = query.filter(
             db.or_(
-                a1.name.like(f"%{str(search)}%"),
-                a2.name.like(f"%{str(search)}%"),
+                a1.name.ilike(f"%{str(search)}%"),
+                a2.name.ilike(f"%{str(search)}%"),
             )
         )
 
@@ -75,9 +75,33 @@ def index_json():
             or_(Entry.from_account_id == account_id, Entry.to_account_id == account_id)
         )
     total_filtered = query.count()
+    # # sorting
+    # order = []
+    # i = 0
+    # while True:
+    #     col_index = request.args.get(f"order[{i}][column]")
+    #     if col_index is None:
+    #         break
+    #     col_name = request.args.get(f"columns[{col_index}][data]")
+    #     if col_name not in [
+    #         "from_account",
+    #         "to_account",
+    #     ]:
+    #         col_name = "from_account"
+    #     descending = request.args.get(f"order[{i}][dir]") == "desc"
+    #   col = getattr(Entry, col_name)
+    #     if descending:
+    #         col = col.desc()
+    #     order.append(col)
+    #     i += 1
+    # if order:
+    #     query = query.order_by(*order)
+
     # pagination
+
     start = request.args.get("start", type=int)
     length = request.args.get("length", type=int)
+    query = query.order_by(Entry.created_date.desc())
     query = query.offset(start).limit(length)
 
     entries = query.all()
@@ -87,8 +111,9 @@ def index_json():
     return jsonify(
         {
             "data": result,
-            "recordsTotal": total_filtered,
+            "recordsFiltered": total_filtered,
             "recordsTotal": Entry.query.count(),
+            "draw": int(request.args.get("draw")),
         }
     )
 

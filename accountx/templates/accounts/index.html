@@ -1,33 +1,56 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="content p-4">
-  <div class="d-flex flex-row justify-content-between p-3">
-    <h4 class="mb-4">Parties</h4>
-    <a href="{{url_for('accounts.create')}}">Add account</a>
-  </div>
-  <div class="widget card flex-row">
-    <section class="card-body">
-      <table style="width:100%" , border="1">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for account in accounts %}
-            <tr>
-              <td>{{ account.name }}</td>
-              <td>
-                <a href="{{url_for('entry.index', account_id=[account.id])}}">Recent Transactions</a>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </table>
-    </section>
-  </div>
+    <div class="d-flex flex-row justify-content-between p-3">
+        <h4 class="mb-4">Parties</h4>
+        <a href="{{url_for('accounts.create')}}">Add account</a>
+    </div>
+    <div class="widget card flex-row shadow p-3 mb-3 bg-white rounded">
+        <section class="card-body">
+            <table style="width:100%" , border="1">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for account in accounts %}
+                        <tr>
+                            <td>{{ account.name }}</td>
+                            <td>
+                                <a href="{{url_for('entry.index', account_id=[account.id])}}">Recent Transactions</a>
+                            </td>
+                            <td>
+                                <div class="d-flex" role="group" aria-label="First group">
+                                    <a href="{{url_for('accounts.edit', account_id=[account.id])}}" type="button" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <form style="margin-left: 5px;" action="{{url_for('accounts.delete', account_id=account.id)}}" method="post" class="accountDelForm">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger"> Delete </a>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </table>
+        </section>
+    </div>
 </div>
+{% endblock %}
+
+
+{% block script %}
+<script>
+    $(document).ready(function () {
+        function logSubmit(event) {
+            let confirmed = confirm('are you sure ?')
+            if (!confirmed) event.preventDefault();
+        }
+
+        $('.accountDelForm').each((index, el) => {
+            el.addEventListener('submit', logSubmit)
+        })
+    })
+</script>
 {% endblock %}
