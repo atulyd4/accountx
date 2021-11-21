@@ -81,6 +81,11 @@ def index():
         )
 
 
+@app.get("/faq")
+def faq():
+    return render_template("faq.html")
+
+
 app.register_blueprint(auth.bp)
 app.register_blueprint(accounts.bp)
 app.register_blueprint(entry.bp)

@@ -1,7 +1,192 @@
-{% extends "base.html" %}
-{% block content %}
-<h1>Index</h1>
-<p class="important">
-  Welcome to Xaccounting &nbsp; <a href="{{url_for('auth.login')}}">Login</a>
-</p>
+{% extends "base-public.html" %} {% block content %}
+
+
+<body class="body-wrapper" data-spy="scroll" data-target=".privacy-nav">
+
+    <!--====================================
+=            Hero Section            =
+=====================================-->
+    <section class="section gradient-banner">
+        <div class="shapes-container">
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="1500" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="200"></div>
+            <div class="shape" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"></div>
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="100"></div>
+            <div class="shape" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300"></div>
+            <div class="shape" data-aos="fade-down-right" data-aos-duration="500" data-aos-delay="200"></div>
+            <div class="shape" data-aos="fade-down-right" data-aos-duration="500" data-aos-delay="100"></div>
+            <div class="shape" data-aos="zoom-out" data-aos-duration="2000" data-aos-delay="500"></div>
+            <div class="shape" data-aos="fade-up-right" data-aos-duration="500" data-aos-delay="200"></div>
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="500" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-up" data-aos-duration="500" data-aos-delay="0"></div>
+            <div class="shape" data-aos="fade-down" data-aos-duration="500" data-aos-delay="0"></div>
+            <div class="shape" data-aos="fade-up-right" data-aos-duration="500" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="500" data-aos-delay="0"></div>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-2 order-md-1 text-center text-md-left">
+                    <h1 class="text-white font-weight-bold mb-4">Manage all your transactions with Accountx</h1>
+                    <li class="list-inline-item ">
+                        <a href=" /faq " class="btn btn-rounded-icon ">
+                            <i class="text-white font-weight-bold "></i> Features
+                        </a>
+                    </li>
+                    <div class="service-block bg-white mt-5">
+                        <!-- Icon -->
+                        <div style="margin-left: 5px;">
+                            <h3 class="mt-4 text-capitalize h5 "> What is Accountx ?</h3>
+                            <p>Accountx is money management application which keeps track of your day to day records of CREDIT-DEBIT money transactions. </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 text-center order-1 order-md-2">
+                    <img class="img-fluid" src="/static/images/mobile.png" alt="screenshot">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--====  End of Hero Section  ====-->
+
+    <section class="section pt-0 position-relative pull-top">
+        <div class="container ">
+            <div class="rounded shadow p-5 bg-white">
+                <div class="row d-flex flex-row justify-content-between p-md-3">
+
+                    <div class="col-lg-4 col-md-6 mt-5 mt-md-0 text-center ">
+                        <i class="ti-paint-bucket text-primary h1"></i>
+                        <h3 class="mt-4 text-capitalize h5 "> Easy</h3>
+                        <p class="regular text-muted"> It is so easy to keep track of all your debit/credit transactions and analyze how much you need to pay or collect .</p>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mt-5 mt-md-0 text-center">
+                        <i class="ti-shine text-primary h1"></i>
+                        <h3 class="mt-4 text-capitalize h5 "> Fast</h3>
+                        <p class="regular text-muted">It doesn't require any extra processing.It is so simple and so fast that you will forget using your paper and pen.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--==================================
+=            Feature Grid            =
+===================================-->
+    <section class="feature section pt-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 ml-auto justify-content-center">
+                    <!-- Feature Mockup -->
+                    <div class="image-content" data-aos="fade-right">
+                        <img class="img-fluid" src="/static/images/feature/feature-new.png" alt="iphone">
+
+                    </div>
+
+                </div>
+                <div class="col-lg-6 mr-auto align-self-center">
+                    <div class="feature-content">
+                        <!-- Feature Title -->
+                        <h2>Increase your productivity with Accountx </h2>
+                        <!-- Feature Description -->
+                        <p class="desc">Starting a business not only requires money but innovative ideas and adaptability to the changes in the market which will help the business flourish. Several small business owners start a business and run it for a few days. But
+                            when it comes to managing finances they find it difficult as all are not good at accounting. Especially in small businesses, people tend to buy things and pay later. Such debit credit transactions involve more complications
+                            for the business owner to keep a note of the pending payment and collect them appropriately. This is additional to the regular accounting like inventory calculations, stock supply, infrastructure rent, etc</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!--====  End of Feature Grid  ====-->
+
+    <!--==============================
+=            Services            =
+===============================-->
+    <section class="service section bg-gray">
+        <div class="container-fluid p-0">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2> Accountx Features</h2>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6 align-self-center ">
+                    <!-- Feature Image -->
+                    <div style="margin-left: auto" service-thumb left " data-aos="fade-right ">
+                        <img class="img-fluid " src="/static/images/feature/feature-new2.png " alt="iphone-ipad ">
+                    </div>
+                </div>
+                <div class="col-lg-5 align-self-center ">
+                    <div class="service-box ">
+                        <div class="row align-items-center ">
+                            <div class="col-md-6 col-xs-12 ">
+                                <!-- Service 01 -->
+                                <div class="service-item ">
+
+                                    <!-- Heading -->
+                                    <h3># searching & shorting</h3>
+                                    <!-- Description -->
+                                    <p>you can seach any person all transactions by name</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12 ">
+                                <!-- Service 01 -->
+                                <div class="service-item ">
+                                    
+                                    <!-- Heading -->
+                                    <h3># csv file</h3>
+                                    <!-- Description -->
+                                    <p>Generate csv of your party or your customer with so much an ease.</p>
+                                </div>
+                            </div>
+                            <div style="text-align: center " class="col-md-6 col-xs-12 ">
+                                <!-- Service 01 -->
+                                <div class="service-item ">
+                                    <!-- Heading -->
+                                    <h3>Overall Analysis</h3>
+                                    <!-- Description -->
+                                    <p>
+Get overall analysis to know how much you need to pay and how much you need to collect from dasboard page, plan your budget accordingly.</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--====  End of Services  ====-->
+
+
+   
+
+    
+    <!-- To Top -->
+    <div class="scroll-top-to ">
+        <i class="ti-angle-up "></i>
+    </div>
+
+    <!-- JAVASCRIPTS -->
+    <script src="/static/plugins/jquery/jquery.min.js "></script>
+    <script src="/static/plugins/bootstrap/bootstrap.min.js "></script>
+    <script src="/static/plugins/slick/slick.min.js "></script>
+    <script src="/static/plugins/fancybox/jquery.fancybox.min.js "></script>
+    <script src="/static/plugins/syotimer/jquery.syotimer.min.js "></script>
+    <script src="/static/plugins/aos/aos.js "></script>
+    <!-- google map -->
+    <script src="/static/plugins/google-map/gmap.js "></script>
+
+    <script src="/static/theme/js/script.js "></script>
+</body>
 {% endblock %}

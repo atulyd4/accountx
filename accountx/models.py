@@ -44,9 +44,13 @@ class User(db.Model):
 
 @db.event.listens_for(User, "after_insert")
 def after_insert(mapper, connection, target):
-    account = Account("SELF")
-    account.user = target
-    db.session.add(account)
+    self = Account("SELF")
+    self.user = target
+    cash = Account("CASH")
+    cash.user = target
+    bank = Account("BANK")
+    bank.user = target
+    db.session.add_all([self, cash, bank])
 
 
 class Account(db.Model):
@@ -62,7 +66,7 @@ class Account(db.Model):
         "Account.id==Entry.to_account_id)",
     )
 
-    def __init__(self, name, phone):
+    def __init__(self, name):
         self.name = name
 
     def __repr__(self):

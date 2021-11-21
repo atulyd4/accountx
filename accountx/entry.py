@@ -44,7 +44,15 @@ class EntryForm(Form):
 # Party handlers
 @bp.get("/")
 def index():
-    return render_template("entry/index.html", entries=[])
+    account_id = request.args.get("account_id")
+    account = None
+    if account_id:
+        account = (
+            Account.query.filter(Account.user_id == current_user().id)
+            .filter(Account.id == account_id)
+            .first()
+        )
+    return render_template("entry/index.html", entries=[], account=account)
 
 
 @bp.get("/entries-json")
@@ -112,7 +120,7 @@ def index_json():
         {
             "data": result,
             "recordsFiltered": total_filtered,
-            "recordsTotal": Entry.query.count(),
+            "recordsTotal": query.count(),
             "draw": int(request.args.get("draw")),
         }
     )
@@ -188,17 +196,3 @@ def details(id):
     else:
         flash("Entry not found", "danger")
         return redirect(url_for("entry.index"))
-
-
-# @bp.get("/<name>")
-# def show_all(name):
-#     latest_entry = (
-#         Entry.query.filter(Entry.user == current_user())
-#         .filter(Entry.to_account == name)
-#         .order_by(Entry.created_date.desc())
-#     )
-#     if latest_entry:
-#         return render_template("entry/all_details.html", latest_entry=latest_entry)
-#     else:
-#         flash("Entry not found", "danger")
-#         return redirect(url_for("entry.index"))

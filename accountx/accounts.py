@@ -28,7 +28,8 @@ def create():
         name = request.form.get("name")
         phone = request.form.get("phone")
         if name is not None:
-            account = Account(name, phone)
+            account = Account(name)
+            account.phone = phone
             account.user = current_user()
             db.session.add(account)
             try:

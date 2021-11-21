@@ -1,8 +1,13 @@
-### Accountx
-Manage personal finance
-record daily expenses, loans etc.
+# Accountx
 
-## Dev Setup
+Accountx is a smallscale book-keeping app , It will help you keep track of your daily transcations.
+
+## System Requirements
+
+1. Postgresql database 
+2. windows / linux / mac with python3 installed 
+
+## Setup
 
 1. initialize virtual environment and activate it
 
@@ -17,7 +22,18 @@ source .venv/bin/activate
  pip install -r requirements.txt
 ```
 
-### Run
+3. Setup database 
+following command will create database
+
+first launch python console
+
+```
+from accountx import db
+
+db.create_all()
+```
+
+## Run
 
 ```
 export FLASK_APP=accountx

@@ -1,10 +1,19 @@
 {% extends "base.html" %} {% block content %}
-<div class="content">
-    <div class="d-flex flex-row justify-content-between p-3">
-        <h4 class="mb-4">Ledger</h4>
+<div class="content p-md-3">
+    <div class="d-flex flex-row justify-content-between p-md-3">
+        <h4 class="mb-1">Entries</h4>
         <a href="{{url_for('entry.create')}}">Create Entry</a>
     </div>
-    <div class="widget card flex-row shadow p-3 mb-3 bg-white rounded">
+    {% if account %}
+    <div class="mb-2 mt-md-1 p-md-3">
+        Showing entries of &nbsp;
+        <button style="border-right: unset; margin-right: -5px; cursor: unset;" class="btn btn-sm btn-outline-info"> 
+                    {{ account.name }}  
+                </button>
+        <a style="border-left: unset;" href="{{url_for('entry.index')}}" class="btn btn-sm btn-outline-info">X</a>
+    </div>
+    {% endif %}
+    <div class="widget card flex-row shadow mb-3 bg-white rounded p-md-3">
         <section class="card-body">
             <table id="data" class="table table-striped">
                 <thead>
@@ -26,7 +35,44 @@
 {% endblock %} {% block script %}
 <script>
     $(document).ready(function() {
+        function newexportaction(e, dt, button, config) {
+            var self = this;
+            var oldStart = dt.settings()[0]._iDisplayStart;
+            dt.one('preXhr', function(e, s, data) {
+                data.start = 0;
+                data.length = 2147483647;
+                dt.one('preDraw', function(e, settings) {
+                    if (button[0].className.indexOf('buttons-copy') >= 0) {
+                        $.fn.dataTable.ext.buttons.copyHtml5.action.call(self, e, dt, button, config);
+                    } else if (button[0].className.indexOf('buttons-csv') >= 0) {
+                        $.fn.dataTable.ext.buttons.csvHtml5.available(dt, config) ?
+                            $.fn.dataTable.ext.buttons.csvHtml5.action.call(self, e, dt, button, config) :
+                            $.fn.dataTable.ext.buttons.csvFlash.action.call(self, e, dt, button, config);
+                    }
+                    dt.one('preXhr', function(e, s, data) {
+                        settings._iDisplayStart = oldStart;
+                        data.start = oldStart;
+                    });
+                    setTimeout(dt.ajax.reload, 0);
+                    return false;
+                });
+            });
+            dt.ajax.reload();
+        };
+
         $('#data').DataTable({
+            dom: 'Bfrtip',
+            buttons: [{
+                extend: 'csv',
+                text: 'Export CSV',
+                action: newexportaction,
+                exportOptions: {
+                    modifier: {
+                        search: 'applied',
+                        order: 'applied'
+                    }
+                }
+            }],
             responsive: true,
             serverTable: true,
             ajax: '/entries/entries-json' + window.location.search,
