@@ -37,6 +37,7 @@ ptyprocess==0.7.0
 Pygments==2.10.0
 pylint==2.11.1
 python-dotenv==0.19.1
+pytz==2021.3
 regex==2021.10.21
 six==1.16.0
 SQLAlchemy==1.4.26
@@ -44,6 +45,7 @@ toml==0.10.2
 tomli==1.2.1
 traitlets==5.1.1
 typing-extensions==3.10.0.2
+uWSGI==2.0.20
 wcwidth==0.2.5
 Werkzeug==2.0.2
 wrapt==1.13.2
