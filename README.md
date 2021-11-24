@@ -5,14 +5,45 @@
 #### Description:
 Accountx is a smallscale book-keeping app , It will help you keep track of your daily transcations.
 It will help you to organise your personal finance. it will give you easy overview of total money you have recieved or paid 
-and how much money currently avilable.
-you can see latest 5 recent transcations on dashboard page. it supports multiple accounts so you can create as much as required accounts bydefault
-three accounts(self,bank,cash) is avilable.
+and how much money currently avilable. you can see latest 5 recent transcations on dashboard page. 
+
+Accountx supports multiple accounts so you can create as much as required accounts by default three accounts(self,bank,cash) are created when you signed up.
 you can download transctions of any specific person or total transactions in csv file.
-you can see live demo click on given link:
+
 Live application link : [https://atul-accountx.herokuapp.com/](https://atul-accountx.herokuapp.com/)
 
-Features list : [https://atul-accountx.herokuapp.com/faq](https://atul-accountx.herokuapp.com/faq)
+## Project Strcuture
+Its a falsk based web application, I am using flask , flask-migration and postgresql as database ( heroku does not support sqlite).
+you can see all dependencies [requirements.txt](./requirements.txt) file.
+
+```sh
+├── Procfile
+├── README.md
+├── accountx
+│   ├── __init__.py
+│   ├── accounts.py
+│   ├── auth.py
+│   ├── entry.py
+│   ├── models.py
+│   ├── static
+│   │   ├── css
+│   │   ├── images
+│   │   ├── js
+│   │   ├── plugins
+│   │   └── theme
+│   ├── templates
+│   └── utils.py
+├── migrations
+│   ├── README
+│   ├── alembic.ini
+│   ├── env.py
+│   ├── script.py.mako
+│   └── versions
+│       └── df4033a14dad_adding_phone.py
+├── requirements.txt
+└── run.py
+```
+
 ## System Requirements
 
 1. Postgresql database
