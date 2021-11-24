@@ -3,7 +3,6 @@
 #### Video Demo: https://youtu.be/o4yLRhvQves
 
 #### Description:
-
 Accountx is a smallscale book-keeping app , It will help you keep track of your daily transcations.
 It will help you to organise your personal finance. it will give you easy overview of total money you have recieved or paid 
 and how much money currently avilable.
