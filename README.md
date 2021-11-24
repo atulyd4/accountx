@@ -1,5 +1,8 @@
 # Accountx
 
+#### Video Demo: https://youtu.be/o4yLRhvQves
+
+#### Description:
 Accountx is a smallscale book-keeping app , It will help you keep track of your daily transcations.
 
 ## System Requirements
